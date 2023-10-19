@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     let url =
-      "/api/auth/login";
+      "https://task-api-lovat.vercel.app/api/auth/login";
 
     let headers = new Headers();
 

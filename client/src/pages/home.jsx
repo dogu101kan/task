@@ -9,7 +9,7 @@ const Home = () => {
 
     useEffect(()=>{
 
-      let url = "/api/table";
+      let url = "https://task-api-lovat.vercel.app/api/table";
       const data = {token:token};
 
       let headers = new Headers();
