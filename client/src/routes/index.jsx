@@ -1,27 +1,35 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home";
 import Login from "../pages/login";
 import PrivateRoute from "../components/private-route";
-import Notfound from "../pages/notfound";
-import App from "../App"
+import App from "../App";
+import Notfound from "../pages/notfound"
 
-const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<Login />} />
-        <Route
-          path="table"
-          element={
-            <PrivateRoute>
-              <Route index element={<Home />} />
-            </PrivateRoute>
+const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index:true,
+        element: <Login />,
+      },
+      {
+        path: "table",
+        element: <PrivateRoute />,
+        children: [
+          {
+            index: true,
+            element: <Home />,
           }
-        />
-        <Route path="*" element={<Notfound />} />
-      </Route>
-    </Routes>
-  );
-};
+        ],
+      },
+      {
+        path: "*",
+        element: <Notfound />,
+      },
+    ],
+  },
+]);
 
-export default AppRoutes;
+export default routes;
