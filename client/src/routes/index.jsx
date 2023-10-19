@@ -15,10 +15,6 @@ const routes = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "*",
-        element: <Notfound />,
-      },
-      {
         path: "table",
         element: <PrivateRoute />,
         children: [
@@ -27,6 +23,10 @@ const routes = createBrowserRouter([
             element: <Home />,
           }
         ],
+      },
+      {
+        path: "*",
+        element: <Notfound />,
       },
     ],
   },
