@@ -4,19 +4,29 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    let url =
-      "https://task-api-lovat.vercel.app/api/auth/login";
+    setLoading(true);
+    let url = "https://task-api-lovat.vercel.app/api/auth/login";
 
     let headers = new Headers();
 
     headers.append("Content-Type", "application/json");
 
-    fetch(url, { method: "POST", headers: headers, body: JSON.stringify(formData) })
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(formData),
+    })
       .then((response) => response.json())
-      .then((json) => {setCurrentAccount(json); navigate("/table");})
+      .then((json) => {
+        setCurrentAccount(json);
+        setLoading(false);
+        navigate("/table")
+        .catch(setLoading(false));
+      });
   };
 
   const handleChange = (e) => {
@@ -46,7 +56,7 @@ const Login = () => {
           onChange={handleChange}
         />
       </label>
-      <button onClick={handleSubmit}>Giriş Yap</button>
+      <button onClick={handleSubmit}>{loading?"Yükleniyor..":"Giriş Yap"}</button>
     </div>
   );
 };
